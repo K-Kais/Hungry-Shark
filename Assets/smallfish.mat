@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: smallfish
+  m_Shader: {fileID: 4800000, guid: 4123c41d365342f498eea2587951bb1c, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - CAUSTICS_OFF
+  - TINT_OFF
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BlendedTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CausticTex:
+        m_Texture: {fileID: 2800000, guid: aaca8f23b4b393048b86ce315680bf9d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMaskTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: c0e2b0a47be624443a68081006d59020, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 1
+    - _AmbientLight: 1
+    - _BlendValue: 0
+    - _CausticScaleX: 0.26865673
+    - _CausticScaleY: 0.26865673
+    - _CausticSpeed: 0.2686567
+    - _CausticsIntensity: 1
+    - _CloakingIntensity: 1
+    - _CloakingRimSize: 1
+    - _EmissionIntensity: 1
+    - _EnableActionLine: 0
+    - _EnableAlphaMask: 0
+    - _EnableBlending: 0
+    - _EnableCaustics: 0
+    - _EnableCloaking: 0
+    - _EnableColoredParts: 0
+    - _EnableCutOut: 0
+    - _EnableCutOutCircular: 0
+    - _EnableEmission: 0
+    - _EnableFresnel: 0
+    - _EnableSurface: 0
+    - _FresnelIntensity: 1
+    - _Intensity: 1
+    - _LightingIntensity: 1
+    - _Radius: 0
+    - _RimIntensity: 1.1641791
+    - _Rimsize: 0.46268657
+    - _Speed: 1
+    - _TintIntensity: 0
+    - _TintInterpolation: 0
+    - _TintMultiply: 0
+    m_Colors:
+    - _CausticColour: {r: 0.046781033, g: 0.34695926, b: 0.41791046, a: 1}
+    - _CloakingColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorB: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorG: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorR: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PlaneNormal: {r: 0, g: 0, b: 0, a: 0}
+    - _PlanePosition: {r: 0, g: 0, b: 0, a: 0}
+    - _RimColour: {r: 0.020049013, g: 0.32078406, b: 0.3358209, a: 0}
+    - _Tint: {r: 1, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
