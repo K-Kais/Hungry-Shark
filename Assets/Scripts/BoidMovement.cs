@@ -1,27 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GridBrushBase;
 
 public class BoidMovement : MonoBehaviour
 {
-    [SerializeField] ListGameObjectVariable _fishes;
-    [SerializeField] FloatVariable _viewRadius;
-    [SerializeField] FloatVariable _weightForward;
-    [SerializeField] FloatVariable _forwardSpeed;
-    [SerializeField] FloatVariable _backwardSpeed;
+    [SerializeField] private Transform _player;
+    [SerializeField] private ListGameObjectVariable _fishes;
+    [SerializeField] private FloatVariable _viewRadius;
+    [SerializeField] private FloatVariable _weightForward;
+    [SerializeField] private FloatVariable _forwardSpeed;
+    [SerializeField] private FloatVariable _backwardSpeed;
     private Rigidbody2D _rigidbody2D;
 
     private void Start()
     {
+        _player = FindObjectOfType<PlayerMovement>().transform;
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
     {
         _rigidbody2D.velocity = CalculateVelocity();
-        transform.rotation = Quaternion.LookRotation(_rigidbody2D.velocity);
-        //FaceFront();
+        LookRotation();
     }
+
+    private void LookRotation()
+    {
+        Quaternion lookRotaion = Quaternion.LookRotation(_rigidbody2D.velocity);
+        transform.rotation = Quaternion.Slerp(transform.localRotation, lookRotaion, Time.fixedDeltaTime * 10f);
+    }
+
     //private void FaceFront()
     //{
     //    float step = Time.fixedDeltaTime * 5f;
@@ -32,7 +38,7 @@ public class BoidMovement : MonoBehaviour
     //    var rotation = transform.eulerAngles;
     //    if (rotation.x >= -90f && rotation.x <= 90f) transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0);
     //    else transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 180);
-        
+
     //}
     private Vector2 CalculateVelocity()
     {
@@ -41,6 +47,7 @@ public class BoidMovement : MonoBehaviour
             + 0.8f * Cohesion(neighboringFishes)
             + 1f * Separation(neighboringFishes)
             + 0.5f * Aligment(neighboringFishes)
+            + 0.2f * Avoidace()
             ).normalized * _forwardSpeed.Value;
 
         return velocity;
@@ -58,6 +65,17 @@ public class BoidMovement : MonoBehaviour
                 neighboringFishes.Add(fish);
         }
         return neighboringFishes;
+    }
+    private Vector2 Avoidace()
+    {
+        Vector2 avoidVector = new Vector2();
+        avoidVector += RunAway();
+        return avoidVector.normalized;
+    }
+    private Vector2 RunAway()
+    {
+        Vector2 neededVelocity = (transform.position - _player.transform.position).normalized * 2f;
+        return neededVelocity - _rigidbody2D.velocity;
     }
     #region Rule 1: Cohesion
     private Vector2 Cohesion(List<GameObject> neighboringFishes)
