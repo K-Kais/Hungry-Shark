@@ -22,7 +22,7 @@ public class BoidMovement : MonoBehaviour
     [SerializeField] private FloatVariable _playerViewRadius;
     [SerializeField] private Transform _playerTransform;
 
-    private List<BoidMovement> _neighboringFishesList;
+    [SerializeField] private List<BoidMovement> _neighboringFishesList;
     public Vector3 velocity { get; private set; }
     private void Start()
     {
@@ -75,11 +75,10 @@ public class BoidMovement : MonoBehaviour
         {
             if (fish == this.gameObject) continue;
 
-            if (Vector2.Distance(transform.position, fish.transform.position) <= _viewRadius.Value)
+            if (Vector2.Distance(transform.position, fish.transform.position) <= _viewRadius.Value && fish.gameObject.activeInHierarchy)
             {
                 _neighboringFishesList.Add(fish);
             }
-                
         }
         return _neighboringFishesList;
     }

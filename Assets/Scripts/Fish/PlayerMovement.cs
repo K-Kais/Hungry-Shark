@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
     }
+    private void FixedUpdate()
+    {
+        LookRotation();
+    }
     private void Move()
     {
         if (Input.GetMouseButtonDown(0))
@@ -23,10 +27,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.velocity = (Input.mousePosition - _initialMousePos).normalized * _speed;
         }
-    }
-    private void FixedUpdate()
-    {
-        LookRotation();
     }
     private void LookRotation()
     {
