@@ -19,25 +19,24 @@ public class BoidMovement : MonoBehaviour
     [SerializeField] private FloatVariable _weightAvoidace;
 
     [Header("Player")]
+    [SerializeField] private FloatVariable _playerViewRadius;
     [SerializeField] private Transform _playerTransform;
-
-    private Rigidbody2D _rigidbody2D;
-
+    public Vector3 velocity { get; private set; }
     private void Start()
     {
         _playerTransform = FindObjectOfType<PlayerMovement>().transform;
-        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
     {
-        _rigidbody2D.velocity = CalculateVelocity();
+        velocity = Vector2.Lerp(velocity, CalculateVelocity(), _turnSpeed.Value * Time.fixedDeltaTime);
+        transform.position += velocity * Time.fixedDeltaTime;
         LookRotation();
     }
 
     private void LookRotation()
     {
-        Quaternion lookRotaion = Quaternion.LookRotation(_rigidbody2D.velocity);
-        transform.rotation = Quaternion.Slerp(transform.localRotation, lookRotaion, Time.fixedDeltaTime * _turnSpeed.Value);
+        Quaternion lookRotaion = Quaternion.LookRotation(velocity);
+        transform.rotation = Quaternion.Slerp(transform.localRotation, lookRotaion, Time.fixedDeltaTime * (_turnSpeed.Value / 2f));
     }
 
     //private void FaceFront()
@@ -88,13 +87,12 @@ public class BoidMovement : MonoBehaviour
     private Vector2 RunAway()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, _playerTransform.position);
-        if (distanceToPlayer <= _viewRadius.Value * 3f)
-    {
-        float avoidanceStrength = Mathf.SmoothStep(0.1f, 1f, 1 / distanceToPlayer);
-        Vector2 desiredVelocity = (transform.position - _playerTransform.position).normalized * avoidanceStrength * 2f;
-        Vector2 currentVelocity = _rigidbody2D.velocity;
-        return Vector2.Lerp(currentVelocity, desiredVelocity, Time.fixedDeltaTime * _turnSpeed.Value * 2f); 
-    }
+        if (distanceToPlayer <= _playerViewRadius.Value)
+        {
+            float avoidanceStrength = Mathf.SmoothStep(0.1f, 1f, 1 / distanceToPlayer);
+            Vector2 desiredVelocity = (transform.position - _playerTransform.position).normalized * avoidanceStrength * 2f;
+            return Vector2.Lerp(velocity, desiredVelocity, Time.fixedDeltaTime * _turnSpeed.Value * 2f);
+        }
         else return Vector2.zero;
     }
     #region Rule 1: Cohesion
@@ -119,10 +117,10 @@ public class BoidMovement : MonoBehaviour
         Vector2 direction;
         Vector2 centrolVelocity = Vector2.zero;
 
-        foreach (var fish in neighboringFishesList) centrolVelocity += fish.GetComponent<Rigidbody2D>().velocity;
+        foreach (var fish in neighboringFishesList) centrolVelocity += (Vector2)fish.GetComponent<BoidMovement>().velocity;
 
         if (neighboringFishesList.Count != 0) centrolVelocity /= neighboringFishesList.Count;
-        else centrolVelocity = _rigidbody2D.velocity;
+        else centrolVelocity = velocity;
 
         direction = centrolVelocity.normalized;
         return direction;

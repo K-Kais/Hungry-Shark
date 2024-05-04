@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WeightAlignment
   m_EditorClassIdentifier: 
   _onValueChange: {fileID: 0}
-  _value: 0.5
+  _value: 0.1

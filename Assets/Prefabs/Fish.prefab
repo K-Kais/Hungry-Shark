@@ -334,7 +334,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2547155837137743252}
   - component: {fileID: 8482948165846546414}
-  - component: {fileID: 971561771280878554}
   - component: {fileID: 622207209963834528}
   - component: {fileID: -524718986805521469}
   m_Layer: 0
@@ -382,27 +381,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!50 &971561771280878554
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2887511124127266606}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!114 &622207209963834528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +402,7 @@ MonoBehaviour:
   _weightSeparation: {fileID: 11400000, guid: 23589b7b08041604fbfd5e820bfceed9, type: 2}
   _weightAlignment: {fileID: 11400000, guid: 6cf8294379bb71643af1cf2f13ec7023, type: 2}
   _weightAvoidace: {fileID: 11400000, guid: 8298ce117295c6e45a3b8eedc5349652, type: 2}
+  _playerViewRadius: {fileID: 11400000, guid: 0887f42c8bf1f3147a8f0c9122e823a8, type: 2}
   _playerTransform: {fileID: 0}
 --- !u!114 &-524718986805521469
 MonoBehaviour:

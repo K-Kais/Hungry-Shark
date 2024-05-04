@@ -402,18 +402,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4915658232201201725, guid: eeed28112a5aea549b44532507b2d85a, type: 3}
-      propertyPath: speed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4915658232201201725, guid: eeed28112a5aea549b44532507b2d85a, type: 3}
-      propertyPath: _speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5025061151758182657, guid: eeed28112a5aea549b44532507b2d85a, type: 3}
-      propertyPath: m_Animation
-      value: 
-      objectReference: {fileID: 7400000, guid: c77013d9f89d6ce47a1e59827b24d214, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeed28112a5aea549b44532507b2d85a, type: 3}
 --- !u!4 &4915658233047285182 stripped
@@ -456,6 +444,10 @@ PrefabInstance:
       propertyPath: _weightAlignment
       value: 
       objectReference: {fileID: 11400000, guid: 6cf8294379bb71643af1cf2f13ec7023, type: 2}
+    - target: {fileID: 622207209963834528, guid: 116e395a3a956414fbbb04bb11b63b61, type: 3}
+      propertyPath: _playerViewRadius
+      value: 
+      objectReference: {fileID: 11400000, guid: 0887f42c8bf1f3147a8f0c9122e823a8, type: 2}
     - target: {fileID: 622207209963834528, guid: 116e395a3a956414fbbb04bb11b63b61, type: 3}
       propertyPath: _weightSeparation
       value: 
