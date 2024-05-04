@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerCollider : MonoBehaviour
 {
-    [SerializeField] private PlayerAnimation _playerAnimation;
+    [SerializeField] private PlayerController _playerController;
     private void OnTriggerEnter(Collider other)
     {
-        _playerAnimation.PlayAnimation(AnimationType.Bite);
+        _playerController.PlayerAnimation.PlayAnimation(AnimationType.Bite);
         other.gameObject.SetActive(false);
     }
 }
