@@ -2,6 +2,7 @@
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private PlayerAnimation _playerAnimation;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed;
     private Vector3 _initialMousePos;
@@ -18,10 +19,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _initialMousePos = Input.mousePosition;
+            _playerAnimation.CurrentAnimationType = AnimationType.SwimFast;
         }
         if (Input.GetMouseButtonUp(0))
         {
             _rb.velocity = Vector3.zero;
+            _playerAnimation.CurrentAnimationType = AnimationType.Swim;
         }
         if (Input.GetMouseButton(0))
         {
