@@ -119,7 +119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5840798249813197249
 Transform:
   m_ObjectHideFlags: 0
@@ -415,12 +415,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8352ce62b7d22489166e04244c39e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 4911013419948996671, guid: eeed28112a5aea549b44532507b2d85a, type: 3}
-  _fishes: {fileID: 11400000, guid: 5c270af824af0bd41b5976e4af488c5b, type: 2}
+  _fishesList: {fileID: 11400000, guid: 5c270af824af0bd41b5976e4af488c5b, type: 2}
+  _turnSpeed: {fileID: 11400000, guid: c136dce7c7aec4741976248b06de050c, type: 2}
   _viewRadius: {fileID: 11400000, guid: d8ad88a2c68af204a83a1d5b9b7ff5a9, type: 2}
-  _weightForward: {fileID: 11400000, guid: c747d3e6533531646ab93a8c83b8fa5b, type: 2}
   _forwardSpeed: {fileID: 11400000, guid: 335c50a6e38934c4cb91377687cfd5e9, type: 2}
-  _backwardSpeed: {fileID: 0}
+  _weightForward: {fileID: 11400000, guid: c747d3e6533531646ab93a8c83b8fa5b, type: 2}
+  _weightCohesion: {fileID: 11400000, guid: 42226598c312a5e4d8de9ee5b5aebf8c, type: 2}
+  _weightSeparation: {fileID: 11400000, guid: 23589b7b08041604fbfd5e820bfceed9, type: 2}
+  _weightAlignment: {fileID: 11400000, guid: 6cf8294379bb71643af1cf2f13ec7023, type: 2}
+  _weightAvoidace: {fileID: 11400000, guid: 8298ce117295c6e45a3b8eedc5349652, type: 2}
+  _playerTransform: {fileID: 0}
 --- !u!114 &-524718986805521469
 MonoBehaviour:
   m_ObjectHideFlags: 0
