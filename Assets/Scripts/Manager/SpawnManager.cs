@@ -7,11 +7,11 @@ public class SpawnManager : Singleton<SpawnManager>
     [SerializeField] private GameObject _fish;
     [SerializeField] private IntVariable _fishCount;
     [SerializeField] private Boundery _boundery;
-    [SerializeField] private ListGameObjectVariable _fishes;
+    [SerializeField] private ListBoidVariable _fishesList;
 
     public void Initialize()
     {
-        _fishes.value.Clear();
+        _fishesList.boidMovements.Clear();
 
         RandomInstantiateFish(_fishCount.Value);
     }
@@ -26,22 +26,22 @@ public class SpawnManager : Singleton<SpawnManager>
 
             GameObject newFish = Instantiate(_fish, new Vector3(xPos, yPos, 0), Quaternion.Euler(Vector3.forward * direction) * rotationFish);
 
-            RegisterFish(newFish);
+            RegisterFish(newFish.GetComponent<BoidMovement>());
         }
     }
 
-    private void RegisterFish(GameObject newFish)
+    private void RegisterFish(BoidMovement newFish)
     {
-        if (_fishes.value.Contains(newFish)) return;
+        if (_fishesList.boidMovements.Contains(newFish)) return;
 
-        ManageBySpawnManager manage = newFish.AddComponent<ManageBySpawnManager>();
+        ManageBySpawnManager manage = newFish.gameObject.AddComponent<ManageBySpawnManager>();
         manage.onDestroyUnityEvent.AddListener(() =>
         {
-            if (!_fishes.value.Remove(newFish))
+            if (!_fishesList.boidMovements.Remove(newFish))
             {
                 Debug.LogError("[SpawnManager] Can't remove fish from list<Fish>");
             }
         });
-        _fishes.value.Add(newFish);
+        _fishesList.boidMovements.Add(newFish);
     }
 }

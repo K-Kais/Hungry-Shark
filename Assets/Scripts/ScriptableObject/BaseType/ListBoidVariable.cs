@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObject/List GameObject Variable")]
-public class ListGameObjectVariable : ScriptableObject
+public class ListBoidVariable : ScriptableObject
 {
-    public List<GameObject> value = new List<GameObject>();
+    public List<BoidMovement> boidMovements = new List<BoidMovement>();
 }

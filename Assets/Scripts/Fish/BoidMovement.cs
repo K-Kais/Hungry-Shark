@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoidMovement : MonoBehaviour
 {
     [Header("Fish Entities List")]
-    [SerializeField] private ListGameObjectVariable _fishesList;
+    [SerializeField] private ListBoidVariable _fishesList;
 
     [Header("Movement and Perception Settings")]
     [SerializeField] private FloatVariable _turnSpeed;
@@ -21,6 +21,8 @@ public class BoidMovement : MonoBehaviour
     [Header("Player")]
     [SerializeField] private FloatVariable _playerViewRadius;
     [SerializeField] private Transform _playerTransform;
+
+    private List<BoidMovement> _neighboringFishesList;
     public Vector3 velocity { get; private set; }
     private void Start()
     {
@@ -53,30 +55,33 @@ public class BoidMovement : MonoBehaviour
     //}
     private Vector2 CalculateVelocity()
     {
-        List<GameObject> neighboringFishesList = GetNeighboringFishesList();
+        _neighboringFishesList = GetNeighboringFishesList();
 
         Vector2 velocity = (_weightForward.Value * (Vector2)transform.forward
-            + _weightCohesion.Value * Cohesion(neighboringFishesList)
-            + _weightSeparation.Value * Separation(neighboringFishesList)
-            + _weightAlignment.Value * Aligment(neighboringFishesList)
+            + _weightCohesion.Value * Cohesion(_neighboringFishesList)
+            + _weightSeparation.Value * Separation(_neighboringFishesList)
+            + _weightAlignment.Value * Aligment(_neighboringFishesList)
             + _weightAvoidace.Value * Avoidace()
             ).normalized * _forwardSpeed.Value;
 
         return velocity;
     }
 
-    private List<GameObject> GetNeighboringFishesList()
+    private List<BoidMovement> GetNeighboringFishesList()
     {
-        List<GameObject> neighboringFishes = new List<GameObject>();
+       _neighboringFishesList = new List<BoidMovement>();
 
-        foreach (var fish in _fishesList.value)
+        foreach (var fish in _fishesList.boidMovements)
         {
             if (fish == this.gameObject) continue;
 
             if (Vector2.Distance(transform.position, fish.transform.position) <= _viewRadius.Value)
-                neighboringFishes.Add(fish);
+            {
+                _neighboringFishesList.Add(fish);
+            }
+                
         }
-        return neighboringFishes;
+        return _neighboringFishesList;
     }
     private Vector2 Avoidace()
     {
@@ -96,7 +101,7 @@ public class BoidMovement : MonoBehaviour
         else return Vector2.zero;
     }
     #region Rule 1: Cohesion
-    private Vector2 Cohesion(List<GameObject> neighboringFishesList)
+    private Vector2 Cohesion(List<BoidMovement> neighboringFishesList)
     {
         Vector2 direction;
         Vector2 centerPos = Vector2.zero;
@@ -112,12 +117,12 @@ public class BoidMovement : MonoBehaviour
     }
     #endregion
     #region Rule 2: Aligment
-    private Vector2 Aligment(List<GameObject> neighboringFishesList)
+    private Vector2 Aligment(List<BoidMovement> neighboringFishesList)
     {
         Vector2 direction;
         Vector2 centrolVelocity = Vector2.zero;
 
-        foreach (var fish in neighboringFishesList) centrolVelocity += (Vector2)fish.GetComponent<BoidMovement>().velocity;
+        foreach (var fish in neighboringFishesList) centrolVelocity += (Vector2)fish.velocity;
 
         if (neighboringFishesList.Count != 0) centrolVelocity /= neighboringFishesList.Count;
         else centrolVelocity = velocity;
@@ -127,7 +132,7 @@ public class BoidMovement : MonoBehaviour
     }
     #endregion
     #region Rule 3: Separation
-    private Vector2 Separation(List<GameObject> neighboringFishesList)
+    private Vector2 Separation(List<BoidMovement> neighboringFishesList)
     {
         Vector2 direction = Vector2.zero;
 

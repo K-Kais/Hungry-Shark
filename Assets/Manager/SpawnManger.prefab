@@ -47,4 +47,4 @@ MonoBehaviour:
   _fish: {fileID: 2887511124127266606, guid: 116e395a3a956414fbbb04bb11b63b61, type: 3}
   _fishCount: {fileID: 11400000, guid: fd51dc774e0ddb8419bdb61dd6087a81, type: 2}
   _boundery: {fileID: 11400000, guid: 7694b208f436d344bb224ed89fbaa081, type: 2}
-  _fishes: {fileID: 11400000, guid: 5c270af824af0bd41b5976e4af488c5b, type: 2}
+  _fishesList: {fileID: 11400000, guid: 5c270af824af0bd41b5976e4af488c5b, type: 2}
