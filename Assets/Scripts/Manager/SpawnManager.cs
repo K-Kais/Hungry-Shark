@@ -28,6 +28,8 @@ public class SpawnManager : Singleton<SpawnManager>
         Quaternion rotationFish = Quaternion.Euler(0, 90f, 0);
 
         GameObject newFish = Instantiate(_fish, pos, Quaternion.Euler(Vector3.forward * direction) * rotationFish);
+        float randomSize = Random.Range(0.5f, 1f);
+        newFish.transform.localScale = new Vector3(randomSize, randomSize, randomSize);
         RegisterFish(newFish.GetComponent<BoidMovement>());
         return newFish;
     }
