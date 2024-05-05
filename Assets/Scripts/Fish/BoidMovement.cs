@@ -38,8 +38,7 @@ public class BoidMovement : MonoBehaviour
 
     private void LookRotation()
     {
-        Quaternion lookRotaion = Quaternion.LookRotation(velocity);
-        transform.rotation = Quaternion.Slerp(transform.localRotation, lookRotaion, Time.fixedDeltaTime * (_turnSpeed.Value / 2f));
+        transform.rotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(velocity), Time.fixedDeltaTime * (_turnSpeed.Value / 2f));
     }
 
     //private void FaceFront()

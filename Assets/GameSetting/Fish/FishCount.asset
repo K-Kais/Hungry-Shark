@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FishCount
   m_EditorClassIdentifier: 
   _onValueChange: {fileID: 11400000, guid: 578bfad17e7915843ae7c88e644c380d, type: 2}
-  _value: 0
+  _value: 50
