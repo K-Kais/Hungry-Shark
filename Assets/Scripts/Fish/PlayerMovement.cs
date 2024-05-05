@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             _rb.velocity = (Input.mousePosition - _initialMousePos).normalized * _speed;
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ObjectPool.Instance.Pool?.Get();
         }
     }
     private void LookRotation()

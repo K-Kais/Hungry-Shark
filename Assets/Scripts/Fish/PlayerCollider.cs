@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Pool;
 
 public class PlayerCollider : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private Transform _mouthPoint;
-    //[SerializeField] private ObjectPool _objectPool;
     private void OnTriggerEnter(Collider other)
     {
         float animationDuration;
@@ -19,7 +19,7 @@ public class PlayerCollider : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         ObjectPool.Instance.Pool.Release(gameObject.GetComponent<RevisedFish>());
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(60f);
         //ObjectPool.Instance.Pool.Get();
     }
 }

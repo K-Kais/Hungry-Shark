@@ -4,17 +4,18 @@ using UnityEngine.Pool;
 
 public class ObjectPool : Singleton<ObjectPool>
 {
-    private IObjectPool<RevisedFish> _objectPool;
-    public IObjectPool<RevisedFish> Pool => _objectPool;
-    public void InitObjectPool(int count)
+    private ObjectPool<RevisedFish> _objectPool;
+    public ObjectPool<RevisedFish> Pool => _objectPool;
+    public void InitObjectPool()
     {
         _objectPool = new ObjectPool<RevisedFish>(CreateObject, OnGetFromPool, OnReleaseToPool, OnDestroyFromPool,
-            defaultCapacity: count);
+            collectionCheck: false);
     }
 
     private RevisedFish CreateObject()
     {
-        RevisedFish revisedObjectInstance = new RevisedFish();
+        Debug.Log("Create");
+        RevisedFish revisedObjectInstance = SpawnManager.Instance.CreateRandomFish().GetComponent<RevisedFish>();
         revisedObjectInstance.ObjectPool = _objectPool;
         return revisedObjectInstance;
     }

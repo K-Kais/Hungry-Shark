@@ -12,24 +12,26 @@ public class SpawnManager : Singleton<SpawnManager>
     public void Initialize()
     {
         _fishesList.boidMovements.Clear();
-
-         RandomInstantiateFish(_fishCount.Value);
+        InstantiateFish(_fishCount.Value);
     }
-    private void RandomInstantiateFish(int fishCount)
+    private void InstantiateFish(int fishCount)
     {
-        ObjectPool.Instance.InitObjectPool(fishCount);
-        for (int i = 0; i < fishCount; i++)
-        {
-            float xPos = Random.Range(-_boundery.XLimit, _boundery.XLimit);
-            float yPos = Random.Range(-_boundery.YLimit, _boundery.YLimit);
-            float direction = Random.Range(0f, 360f);
-            Quaternion rotationFish = Quaternion.Euler(0, 90f, 0);
-
-            GameObject newFish = Instantiate(_fish, new Vector3(xPos, yPos, 0), Quaternion.Euler(Vector3.forward * direction) * rotationFish);
-
-            RegisterFish(newFish.GetComponent<BoidMovement>());
-        }
+        ObjectPool.Instance.InitObjectPool();
+        for (int i = 0; i < fishCount; i++) CreateRandomFish();
     }
+
+    public GameObject CreateRandomFish()
+    {
+        float xPos = Random.Range(-_boundery.XLimit, _boundery.XLimit);
+        float yPos = Random.Range(-_boundery.YLimit, _boundery.YLimit);
+        float direction = Random.Range(0f, 360f);
+        Quaternion rotationFish = Quaternion.Euler(0, 90f, 0);
+
+        GameObject newFish = Instantiate(_fish, new Vector3(xPos, yPos, 0), Quaternion.Euler(Vector3.forward * direction) * rotationFish);
+        RegisterFish(newFish.GetComponent<BoidMovement>());
+        return newFish;
+    }
+
     private void RegisterFish(BoidMovement newFish)
     {
         if (_fishesList.boidMovements.Contains(newFish)) return;
