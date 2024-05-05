@@ -7,7 +7,12 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Animation animationComponent;
     public AnimationType CurrentAnimationType = AnimationType.Swim;
 
-    public void PlayAnimation(AnimationType animType) => StartCoroutine(ChangeAnimSmoothly(animType, 0.3f));
+    public void PlayAnimation(AnimationType animType, out float duration)
+    {
+        duration = animationComponent[animType.ToString()].length - 0.2f;
+        StartCoroutine(ChangeAnimSmoothly(animType, 0.2f));
+    }
+
     private IEnumerator ChangeAnimSmoothly(AnimationType type, float fadeTime)
     {
         animationComponent.Play(type.ToString());
