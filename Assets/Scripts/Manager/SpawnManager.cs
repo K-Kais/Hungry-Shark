@@ -23,8 +23,20 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public GameObject CreateRandomFish()
     {
+        Vector3 pos = RandomPos();
+        float direction = Random.Range(0f, 360f);
+        Quaternion rotationFish = Quaternion.Euler(0, 90f, 0);
+
+        GameObject newFish = Instantiate(_fish, pos, Quaternion.Euler(Vector3.forward * direction) * rotationFish);
+        RegisterFish(newFish.GetComponent<BoidMovement>());
+        return newFish;
+    }
+
+    public Vector3 RandomPos()
+    {
         float xPos;
         float yPos;
+
         float cameraX = Camera.main.transform.position.x;
         float cameraY = Camera.main.transform.position.y;
 
@@ -36,38 +48,21 @@ public class SpawnManager : Singleton<SpawnManager>
         float rand = Random.Range(0f, 1f);
         if (rand < 0.5f)
         {
-            if (Random.Range(0f, 1f) < 0.5f)
-            {
-                xPos = camXMin;
-            }
-            else
-            {
-                xPos = camXMax;
-            }
+            if (Random.Range(0f, 1f) < 0.5f) xPos = camXMin;
+            else xPos = camXMax;
 
             yPos = Random.Range(camYMin, camYMax);
         }
         else
         {
-            if (Random.Range(0f, 1f) < 0.5f)
-            {
-                yPos = camYMin;
-            }
-            else
-            {
-                yPos = camYMax;
-            }
+            if (Random.Range(0f, 1f) < 0.5f) yPos = camYMin;
+            else yPos = camYMax;
 
             xPos = Random.Range(camXMin, camXMax);
         }
-
-        float direction = Random.Range(0f, 360f);
-        Quaternion rotationFish = Quaternion.Euler(0, 90f, 0);
-
-        GameObject newFish = Instantiate(_fish, new Vector3(xPos, yPos, 0), Quaternion.Euler(Vector3.forward * direction) * rotationFish);
-        RegisterFish(newFish.GetComponent<BoidMovement>());
-        return newFish;
+        return new Vector3(xPos, yPos, 0);
     }
+
     private void RegisterFish(BoidMovement newFish)
     {
         if (_fishesList.boidMovements.Contains(newFish)) return;

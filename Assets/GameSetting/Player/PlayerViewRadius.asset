@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerViewRadius
   m_EditorClassIdentifier: 
   _onValueChange: {fileID: 0}
-  _value: 2
+  _value: 3

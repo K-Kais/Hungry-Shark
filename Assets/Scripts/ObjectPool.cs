@@ -19,6 +19,10 @@ public class ObjectPool : Singleton<ObjectPool>
         return revisedObjectInstance;
     }
     private void OnReleaseToPool(RevisedFish pooledObject) => pooledObject.gameObject.SetActive(false);
-    private void OnGetFromPool(RevisedFish pooledObject) => pooledObject.gameObject.SetActive(true);
+    private void OnGetFromPool(RevisedFish pooledObject)
+    {
+        pooledObject.transform.position = SpawnManager.Instance.RandomPos();
+        pooledObject.gameObject.SetActive(true);
+    }
     private void OnDestroyFromPool(RevisedFish pooledObject) => Destroy(pooledObject.gameObject);
 }

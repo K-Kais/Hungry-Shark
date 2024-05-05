@@ -11,16 +11,10 @@ public class PlayerCollider : MonoBehaviour
     {
         float animationDuration;
         _playerController.PlayerAnimation.PlayAnimation(AnimationType.Bite, out animationDuration);
-        StartCoroutine(DisableGameObjectAfterDelay(other.gameObject, animationDuration));
-    }
-    private IEnumerator DisableGameObjectAfterDelay(GameObject gameObject, float delay)
-    {
-        gameObject.transform.DOMove(_mouthPoint.position, delay).SetEase(Ease.InBack, 0.1f);
-        yield return new WaitForSeconds(delay);
-
-        ObjectPool.Instance.Pool.Release(gameObject.GetComponent<RevisedFish>());
-        //yield return new WaitForSeconds(60f);
-        //ObjectPool.Instance.Pool.Get();
+        other.transform.DOMove(_mouthPoint.position, animationDuration / 2f).SetEase(Ease.InBack, 0.1f).OnComplete(() =>
+        {
+            ObjectPool.Instance.Pool.Release(other.GetComponent<RevisedFish>());
+        });
     }
 }
 

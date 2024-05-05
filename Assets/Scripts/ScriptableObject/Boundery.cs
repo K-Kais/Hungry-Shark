@@ -23,7 +23,7 @@ public class Boundery : ScriptableObject
     }
     private void CalculateLimit()
     {
-        _yLimit = Camera.main.orthographicSize + 2f;
-        _xLimit = _yLimit * Screen.width / Screen.height + 2f;
+        _yLimit = Camera.main.orthographicSize + 1f;
+        _xLimit = _yLimit * Screen.width / Screen.height + 1f;
     }
 }
