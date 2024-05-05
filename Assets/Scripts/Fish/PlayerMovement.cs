@@ -31,9 +31,9 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.velocity = (Input.mousePosition - _initialMousePos).normalized * _speed;
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            ObjectPool.Instance.Pool?.Get();
+            for (int i = 0; i < 10; i++) ObjectPool.Instance.Pool.Get();
         }
     }
     private void LookRotation()

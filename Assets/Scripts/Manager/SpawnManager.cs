@@ -12,6 +12,7 @@ public class SpawnManager : Singleton<SpawnManager>
     public void Initialize()
     {
         _fishesList.boidMovements.Clear();
+
         InstantiateFish(_fishCount.Value);
     }
     private void InstantiateFish(int fishCount)
@@ -22,8 +23,44 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public GameObject CreateRandomFish()
     {
-        float xPos = Random.Range(-_boundery.XLimit, _boundery.XLimit);
-        float yPos = Random.Range(-_boundery.YLimit, _boundery.YLimit);
+        float xPos;
+        float yPos;
+        float cameraX = Camera.main.transform.position.x;
+        float cameraY = Camera.main.transform.position.y;
+
+        float camXMin = cameraX - _boundery.XLimit;
+        float camXMax = cameraX + _boundery.XLimit;
+        float camYMin = cameraY - _boundery.YLimit;
+        float camYMax = cameraY + _boundery.YLimit;
+
+        float rand = Random.Range(0f, 1f);
+        if (rand < 0.5f)
+        {
+            if (Random.Range(0f, 1f) < 0.5f)
+            {
+                xPos = camXMin;
+            }
+            else
+            {
+                xPos = camXMax;
+            }
+
+            yPos = Random.Range(camYMin, camYMax);
+        }
+        else
+        {
+            if (Random.Range(0f, 1f) < 0.5f)
+            {
+                yPos = camYMin;
+            }
+            else
+            {
+                yPos = camYMax;
+            }
+
+            xPos = Random.Range(camXMin, camXMax);
+        }
+
         float direction = Random.Range(0f, 360f);
         Quaternion rotationFish = Quaternion.Euler(0, 90f, 0);
 
@@ -31,7 +68,6 @@ public class SpawnManager : Singleton<SpawnManager>
         RegisterFish(newFish.GetComponent<BoidMovement>());
         return newFish;
     }
-
     private void RegisterFish(BoidMovement newFish)
     {
         if (_fishesList.boidMovements.Contains(newFish)) return;

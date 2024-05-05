@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -14,7 +13,7 @@ public class ObjectPool : Singleton<ObjectPool>
 
     private RevisedFish CreateObject()
     {
-        Debug.Log("Create");
+        Debug.Log("Create new fish");
         RevisedFish revisedObjectInstance = SpawnManager.Instance.CreateRandomFish().GetComponent<RevisedFish>();
         revisedObjectInstance.ObjectPool = _objectPool;
         return revisedObjectInstance;

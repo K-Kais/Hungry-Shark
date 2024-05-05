@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObject/Boundery")]
@@ -7,7 +5,6 @@ public class Boundery : ScriptableObject
 {
     private float _xLimit;
     private float _yLimit;
-
     public float XLimit
     {
         get
@@ -24,14 +21,9 @@ public class Boundery : ScriptableObject
             return _yLimit;
         }
     }
-
-    private void Awake()
-    {
-        CalculateLimit();
-    }
     private void CalculateLimit()
     {
-        _yLimit = Camera.main.orthographicSize + 1f;
-        _xLimit = _yLimit * Screen.width / Screen.height + 1f;
+        _yLimit = Camera.main.orthographicSize + 2f;
+        _xLimit = _yLimit * Screen.width / Screen.height + 2f;
     }
 }
