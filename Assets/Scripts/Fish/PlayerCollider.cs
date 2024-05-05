@@ -6,6 +6,7 @@ public class PlayerCollider : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private Transform _mouthPoint;
+    //[SerializeField] private ObjectPool _objectPool;
     private void OnTriggerEnter(Collider other)
     {
         float animationDuration;
@@ -16,7 +17,10 @@ public class PlayerCollider : MonoBehaviour
     {
         gameObject.transform.DOMove(_mouthPoint.position, delay).SetEase(Ease.InBack, 0.1f);
         yield return new WaitForSeconds(delay);
-        gameObject.SetActive(false);
+
+        ObjectPool.Instance.Pool.Release(gameObject.GetComponent<RevisedFish>());
+        yield return new WaitForSeconds(2f);
+        //ObjectPool.Instance.Pool.Get();
     }
 }
 

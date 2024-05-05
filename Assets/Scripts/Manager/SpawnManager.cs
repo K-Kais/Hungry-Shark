@@ -13,10 +13,11 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         _fishesList.boidMovements.Clear();
 
-        RandomInstantiateFish(_fishCount.Value);
+         RandomInstantiateFish(_fishCount.Value);
     }
     private void RandomInstantiateFish(int fishCount)
     {
+        ObjectPool.Instance.InitObjectPool(fishCount);
         for (int i = 0; i < fishCount; i++)
         {
             float xPos = Random.Range(-_boundery.XLimit, _boundery.XLimit);
@@ -29,7 +30,6 @@ public class SpawnManager : Singleton<SpawnManager>
             RegisterFish(newFish.GetComponent<BoidMovement>());
         }
     }
-
     private void RegisterFish(BoidMovement newFish)
     {
         if (_fishesList.boidMovements.Contains(newFish)) return;
