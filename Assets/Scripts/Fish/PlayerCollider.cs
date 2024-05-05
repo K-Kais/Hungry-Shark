@@ -14,9 +14,9 @@ public class PlayerCollider : MonoBehaviour
     }
     private IEnumerator DisableGameObjectAfterDelay(GameObject gameObject, float delay)
     {
-        gameObject.transform.DOMove(_mouthPoint.position, delay).SetEase(Ease.InOutBack);
+        gameObject.transform.DOMove(_mouthPoint.position, delay).SetEase(Ease.InBack, 0.1f);
         yield return new WaitForSeconds(delay);
         gameObject.SetActive(false);
     }
 }
-    
+
